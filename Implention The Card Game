@@ -3,9 +3,9 @@
 עניתי על שאלות החובה, אני רוצה להסביר על המנגנון של הפונקציה שיוצרת מערך דו מימדי עם זוגות מספרים רנדומלים.
 מאחר ואני לא אוהב פתרונות שמתבססים על "ברוט פורס" אלא כמוצא אחרון, בניתי את הפונקציה כך:
 תחילה יצרתי מערך חד ממדי עם כל המספרים מ 0 עד מספר נתון, 
-עירבלתי את המערך עי שהחלפתי את הערכים בין 2 תאים, שמקיימים את תכונת הרנדומליות, מספר פעמים.
+עירבלתי את המערך עי שהחלפתי את הערכים בין 2 תאים,שוב ושוב בצורה רנדומלית.
 בשביל לקבל זוגות, חילקתי את כל המערך  ב 2.
-ואז הימרתי את המערך החד ממדי למערך דו ממדי תואם.
+ואז המרתי את המערך החד ממדי למערך דו ממדי תואם.
 
 הפונקציה שמפעילה את המשחק " משחק הקלפים" אין תחכום מיוחד ואני בטוח שאפשר לקצר את הקוד, אני רק דאגתי שהוא יעבוד 
 וינטרל את כל הערכים שאפשר לקבל מהמשתמש ואינם חוקיים.
@@ -15,16 +15,16 @@
 
 שמות הפונקציות:
 
-void TheCardGame()
-int[] Create1DArrayForTheCardGame(int a)
-int[,] Create2DArrayForTheCardGame(int a)
-int[] Create1DMetrixWithI(int sizeOfArray)
-void PrintArray1D(int[] array)
-void PrintArray2D(int[,] array)
-int SumOf2DArray(int[,] array)//אין צורך בפונקציה במישמוש שבחרתי
-int[] Shufle1Sell(int[] array, int a, int b)
-int[] Shufle1DArray(int[] array)
-int[] AverageArrayBy2(int[] array)
+void TheCardGame()// מפעיל את המשחק
+int[] Create1DArrayForTheCardGame(int a)// פונקצית עזר לבניית מערך דו ממדי
+int[,] Create2DArrayForTheCardGame(int a)// בונה מערך דו ממדי שמתאים למשחק
+int[] Create1DMetrixWithI(int sizeOfArray)// פונקצית עזר לבניית  מערך חד ממדי
+void PrintArray1D(int[] array)// פונקצית עזר - הדפסה
+void PrintArray2D(int[,] array)// פונקציית עזר - הדפסה
+int SumOf2DArray(int[,] array)//--אין צורך בפונקציה במישמוש שבחרתי--
+int[] Shufle1Sell(int[] array, int a, int b)// פונקצית עזר לעירבול התאים
+int[] Shufle1DArray(int[] array)// פונקציה שמערבלת מערך
+int[] AverageArrayBy2(int[] array)// פונקצית עזר שמחלקת כל תא במערך ב 2
 
 static void TheCardGame()
         {
