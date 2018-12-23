@@ -1,0 +1,170 @@
+תוכן ענינים:
+
+עניתי על שאלות החובה, אני רוצה להסביר על המנגנון של הפונקציה שיוצרת מערך דו מימדי עם זוגות מספרים רנדומלים.
+מאחר ואני לא אוהב פתרונות שמתבססים על "ברוט פורס" אלא כמוצא אחרון, בניתי את הפונקציה כך:
+תחילה יצרתי מערך חד ממדי עם כל המספרים מ 0 עד מספר נתון, 
+עירבלתי את המערך עי שהחלפתי את הערכים בין 2 תאים, שמקיימים את תכונת הרנדומליות, מספר פעמים.
+בשביל לקבל זוגות, חילקתי את כל המערך  ב 2.
+ואז הימרתי את המערך החד ממדי למערך דו ממדי תואם.
+
+הפונקציה שמפעילה את המשחק " משחק הקלפים" אין תחכום מיוחד ואני בטוח שאפשר לקצר את הקוד, אני רק דאגתי שהוא יעבוד 
+וינטרל את כל הערכים שאפשר לקבל מהמשתמש ואינם חוקיים.
+
+*
+אם תבקש מערך דו ממדי שצלעו הוא מספר אי זוגי הפונקציה תגדיל את המספר ב 1 ותתן את המערך הדו ממדי שיווצר
+
+שמות הפונקציות:
+
+void TheCardGame()
+int[] Create1DArrayForTheCardGame(int a)
+int[,] Create2DArrayForTheCardGame(int a)
+int[] Create1DMetrixWithI(int sizeOfArray)
+void PrintArray1D(int[] array)
+void PrintArray2D(int[,] array)
+int SumOf2DArray(int[,] array)//אין צורך בפונקציה במישמוש שבחרתי
+int[] Shufle1Sell(int[] array, int a, int b)
+int[] Shufle1DArray(int[] array)
+int[] AverageArrayBy2(int[] array)
+
+static void TheCardGame()
+        {
+            Console.WriteLine("enter a positive number:");
+            int a = int.Parse(Console.ReadLine());
+            int[,] array = Create2DArrayForTheCardGame(a);
+            string[,] strArray = new string[a, a];
+            for (int i = 0; i < strArray.GetLength(0); i++)
+                for (int j = 0; j < strArray.GetLength(1); j++)
+                    strArray[i, j] = "x";            
+            int sumOfArray = 0;
+            while (sumOfArray != array.Length)
+            {
+                Console.WriteLine("enter a pair of positive numbers:");
+                int num1 = int.Parse(Console.ReadLine());
+                int num2 = int.Parse(Console.ReadLine());
+                while (num1 < 0 || num2 < 0 || num1 > a - 1 || num2 > a - 1 || strArray[num1, num2] == "o")
+                {
+                    if (num1 < 0 || num2 < 0 || num1 > a - 1 || num2 > a - 1)
+                    {
+                        Console.WriteLine("the number that you enter are incorect. plesae enter again:");
+                    }
+                    else
+                    {
+                        Console.WriteLine("you alredy find this card.. pick anoter");
+                    }
+                    num1 = int.Parse(Console.ReadLine());
+                    num2 = int.Parse(Console.ReadLine());
+
+                }
+
+                Console.WriteLine("you picked the card:" + array[num1, num2]);
+                Console.WriteLine("enter a second pair of positive numbers:");
+                int num3 = int.Parse(Console.ReadLine());
+                int num4 = int.Parse(Console.ReadLine());
+                while (num3 < 0 || num4 < 0 || num3 > a - 1 || num4 > a - 1 || (num1 == num3 && num2 == num4) || strArray[num3, num4] == "o")
+                {
+                    if (num3 < 0 || num4 < 0 || num3 > a - 1 || num4 > a - 1)
+                    {
+                        Console.WriteLine("the number that you enter are incorect. plesae enter again:");
+                    }
+                    else if (strArray[num3, num4] == "o")
+                    {
+                        Console.WriteLine("you alredy find this card.. pick anoter");
+                    }
+                    else
+                    {
+                        Console.WriteLine("you picked the same numbers. plesae enter again:");
+                    }
+                    num3 = int.Parse(Console.ReadLine());
+                    num4 = int.Parse(Console.ReadLine());
+                }
+                if (array[num1, num2] == array[num3, num4])
+                {
+                    Console.WriteLine("you find the right per!");
+                    sumOfArray += 2;
+                    strArray[num1, num2] = "o";
+                    strArray[num3, num4] = "o";
+                }
+                else
+                {
+                    Console.WriteLine("its not the right per... try again");
+                }
+            }
+            Console.WriteLine("good! you complete the game :)");
+            Console.ReadKey();
+        }
+        static int[] Create1DArrayForTheCardGame(int a)
+        {
+            return AverageArrayBy2(Shufle1DArray(Create1DMetrixWithI(a)));
+        }
+        static int[,] Create2DArrayForTheCardGame(int a)
+        {
+            if (a % 2 == 1)
+                a++;
+            int[] array1 = Create1DArrayForTheCardGame(a * a);
+            int[,] array2 = new int[a, a];
+            for (int i = 0; i < a * a; i++)
+                array2[i / a, i % a] = array1[i];
+            return array2;
+
+
+
+        }
+        static int[] Create1DMetrixWithI(int sizeOfArray)
+        {
+            int[] array = new int[sizeOfArray];
+            for (int i = 0; i < array.GetLength(0); i++)
+                array[i] = i;
+            return array;
+        }
+        static void PrintArray1D(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+                Console.Write(array[i] + " ");
+            Console.ReadKey();
+        }
+        static void PrintArray2D(int[,] array)
+        {
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    Console.Write(array[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+            Console.ReadKey();
+        }
+        static int SumOf2DArray(int[,] array)
+        {
+            int sum = 0;
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    sum += array[i, j];
+                }
+            }
+            return sum;
+        }
+        static int[] Shufle1Sell(int[] array, int a, int b)
+        {
+            int temp;
+            temp = array[a];
+            array[a] = array[b];
+            array[b] = temp;
+            return array;
+        }
+        static int[] Shufle1DArray(int[] array)
+        {
+            Random randomGenerator = new Random();
+            for (int i = 0; i < array.Length; i++)
+                Shufle1Sell(array, i, randomGenerator.Next(0, array.Length));
+            return array;
+
+        }
+        static int[] AverageArrayBy2(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+                array[i] = array[i] / 2;
+            return array;
+        }
